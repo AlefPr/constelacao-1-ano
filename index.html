@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#0a0618">
+    <meta name="description" content="Sara + Alef · 1 Ano — a nossa história, estrela por estrela.">
+    <meta name="robots" content="noindex, nofollow">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:title" content="Sara + Alef · 1 Ano">
+    <meta property="og:description" content="A nossa história, estrela por estrela.">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Sara + Alef · 1 Ano">
+    <meta name="twitter:description" content="A nossa história, estrela por estrela.">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Sara + Alef">
+    <title>Sara + Alef · 1 Ano</title>
+
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" href="favicon.ico" sizes="any">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="manifest" href="manifest.webmanifest">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;700&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="sky-bg" aria-hidden="true"></div>
+    <div class="glow-global" id="glow-global" aria-hidden="true"></div>
+
+    <!-- Botão de música -->
+    <button id="btn-musica" aria-label="Tocar música" title="Tocar música">
+        <span class="icone-play" style="font-size:1.3rem; line-height:1;">&#9654;</span>
+        <span class="equalizer"><span></span><span></span><span></span><span></span></span>
+    </button>
+
+    <canvas id="canvas-fogos" aria-hidden="true"></canvas>
+    <canvas id="canvas-infinito" aria-hidden="true"></canvas>
+
+    <main id="conteudo">
+
+        <!-- ============ CAPÍTULO 0 · ABERTURA ============ -->
+        <section id="inicio">
+            <canvas id="hero-ceu" aria-hidden="true"></canvas>
+            <div class="hero-inner">
+                <p class="nomes">Sara &middot; Alef</p>
+                <h1 class="cursiva titulo-hero">1 Ano</h1>
+                <p class="cursiva sub-hero">da nossa constelação</p>
+
+                <div id="contador" class="glass">
+                    <div class="rotulo">Juntos há</div>
+                    <div class="tempo"><span class="d" id="ct-dias">0</span> <span class="un">dias</span><br>
+                        <span id="ct-horas">0</span>h&nbsp; <span id="ct-min">0</span>m&nbsp; <span id="ct-seg">0</span>s</div>
+                </div>
+                <p class="contagem-regressiva" id="contagem-regressiva" aria-live="polite"></p>
+            </div>
+            <div class="seta-hero" id="seta-hero">&#9660;</div>
+        </section>
+
+        <!-- ============ TÍTULO GIGANTE ============ -->
+        <section id="titulo-gigante">
+            <p class="kicker mask-ui">conhe&ccedil;a</p>
+            <h2 class="titulo-mask mask-ui">Sara &#10022; Alef</h2>
+            <p class="cursiva sub-mask mask-ui">nossa hist&oacute;ria, estrela por estrela</p>
+            <p class="lingua-do-dia mask-ui" id="lingua-do-dia" title="toca pra trocar" role="button" tabindex="0"></p>
+            <div class="seta-hero" id="seta-capitulos">&#9660;</div>
+        </section>
+
+        <!-- ============ CAPÍTULOS (gerados) ============ -->
+        <section id="capitulos" aria-label="Nossa história em capítulos"></section>
+
+        <!-- ============ CONSTELAÇÃO (scroll único) ============ -->
+        <section id="constelacao-scroll">
+            <div class="constelacao-intro-2 mask-ui">
+                <h2 class="cursiva">E agora, o nosso c&eacute;u</h2>
+                <p class="dica">Continue <span class="manchinha">descendo</span>: cada estrela &eacute; um cap&iacute;tulo da nossa hist&oacute;ria.</p>
+            </div>
+            <div class="constelacao-runner">
+                <div class="constelacao-canvas">
+                    <canvas id="tela-constelacao"></canvas>
+                    <div class="constelacao-progress"><b id="qtd-estrelas">0</b> / <span id="total-estrelas">18</span> estrelas</div>
+                    <div class="constelacao-frase" id="constelacao-frase">S &#10022; A &#10022; no nosso c&eacute;u</div>
+                    <div id="chuva-coracao" aria-hidden="true"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ A LUA DA NOSSA NOITE ============ -->
+        <section id="lua" aria-label="A lua da nossa noite">
+            <div class="lua-intro mask-ui">
+                <h2 class="cursiva">a lua daquela noite</h2>
+                <p class="lua-sub">a lua estava assim quando a gente come&ccedil;ou</p>
+            </div>
+            <div class="lua-card glass mask-ui">
+                <canvas id="canvas-lua" aria-label="Fase da lua em 23 de outubro de 2025"></canvas>
+                <div class="lua-info">
+                    <p class="lua-fase" id="lua-fase">lua nova</p>
+                    <p class="lua-luz"><span id="lua-luz">0%</span> iluminada</p>
+                    <p class="lua-data">23 &middot; 10 &middot; 2025 &middot; 00:00</p>
+                </div>
+            </div>
+            <p class="lua-nota mask-ui" id="lua-nota"></p>
+        </section>
+
+        <!-- ============ NÚMEROS QUE CONTAM ============ -->
+        <section id="numeros">
+            <h2 class="cursiva mask-ui">N&uacute;meros do nosso amor</h2>
+            <div class="stats">
+                <div class="stat mask-ui"><span class="stat-val" data-unidade="dias">0</span><span class="stat-rot">dias</span></div>
+                <div class="stat mask-ui"><span class="stat-val" data-unidade="horas">0</span><span class="stat-rot">horas</span></div>
+                <div class="stat mask-ui"><span class="stat-val" data-unidade="minutos">0</span><span class="stat-rot">minutos</span></div>
+                <div class="stat infinito mask-ui"><span class="stat-val-inf">&#8734;</span><span class="stat-rot">amores</span></div>
+            </div>
+        </section>
+
+        <!-- ============ RECEITA DO NOSSO AMOR ============ -->
+        <section id="receita">
+            <h2 class="cursiva mask-ui">Receita do nosso amor</h2>
+            <div class="receita-card mask-ui">
+                <div class="rec-cab">
+                    <p class="rec-meta">tempo de preparo: a vida toda</p>
+                    <p class="rec-meta rec-rend">rendimento: 1 amor infinito</p>
+                </div>
+                <div class="rec-bloco">
+                    <h3 class="rec-titulo">ingredientes</h3>
+                    <ul class="rec-ingredientes">
+                        <li>2 x&iacute;caras de risada besta</li>
+                        <li>1 pitada de ci&uacute;me saud&aacute;vel</li>
+                        <li>3 colheres de sil&ecirc;ncio confort&aacute;vel</li>
+                        <li>o tanto de &#8220;te amo&#8221; que o cora&ccedil;&atilde;o aguentar</li>
+                        <li>pacote de paci&ecirc;ncia com validade: nunca</li>
+                        <li>a&ccedil;&uacute;car cristal do nosso dia 23/10</li>
+                    </ul>
+                </div>
+                <div class="rec-bloco">
+                    <h3 class="rec-titulo">modo de preparo</h3>
+                    <ol class="rec-modo">
+                        <li>misture os olhares at&eacute; virar conversa</li>
+                        <li>deixe descansar numa constela&ccedil;&atilde;o</li>
+                        <li>adicione os cap&iacute;tulos um a um</li>
+                        <li>leve ao fogo baixo e segure at&eacute; o cora&ccedil;&atilde;o se completar</li>
+                        <li>sirva quente, todos os dias, por toda a vida</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ MARQUEE INFINITO ============ -->
+        <section id="marquee-secao">
+            <div class="marquee-faixa reversa" id="mq-1" aria-hidden="true"></div>
+            <div class="marquee-faixa" id="mq-2" aria-hidden="true"></div>
+        </section>
+
+        <!-- ============ FINAL ============ -->
+        <section id="final">
+            <div class="pergunta glass">
+                <div class="estrela-grande">&#10022;</div>
+                <h2 class="cursiva">Uma &uacute;ltima estrela...</h2>
+                <p class="pergunta-texto">Sara, quer acender mais estrelas comigo a partir de agora?</p>
+
+                <div class="botoes">
+                    <button class="btn-sim" id="btn-sim">Sim, com voc&ecirc; &#128154;</button>
+                    <button class="btn-nao" id="btn-nao">N&atilde;o &#128064;</button>
+                </div>
+
+                <div class="escapadas" id="escapadas">voc&ecirc; ainda n&atilde;o tentou fugir</div>
+            </div>
+
+            <div id="ponte-ceu" aria-hidden="true"><span class="ponte-est">&#10022;</span></div>
+
+            <div class="filme" id="filme-final" aria-hidden="true">
+                <div class="cine-apresenta" id="cine-apresenta">Alef apresenta</div>
+
+                <div class="cine-poster" id="cine-poster" aria-hidden="true">
+                    <img id="cine-poster-img" alt="P&ocirc;ster do filme">
+                </div>
+
+                <div class="cine-rolagem" id="cine-rolagem" aria-hidden="true"></div>
+
+                <p class="cine-sub" id="cine-sub" aria-hidden="true"></p>
+
+                <div class="cine-flashback" id="cine-flashback" aria-hidden="true"></div>
+
+                <!-- cena extra (pós-créditos) -->
+                <div class="cine-extra" id="cine-extra" aria-hidden="true">
+                    <p class="cine-extra-tag" id="cine-extra-tag">cena extra</p>
+                    <img class="cine-extra-img" id="cine-extra-img" alt="" hidden>
+                    <p class="cine-extra-texto" id="cine-extra-texto"></p>
+                    <p class="cine-extra-dica">toque para continuar</p>
+                </div>
+
+                <div class="cine-cap" id="cine-cap" aria-hidden="true">
+                    <p class="cine-fim" id="cine-fim">o fim? n&atilde;o &mdash; s&oacute; o come&ccedil;o</p>
+
+                    <div class="hold-area" id="hold-area">
+                        <button class="cine-coracao" id="btn-hold" aria-label="Segure o cora&ccedil;&atilde;o para abrir o bilhete">&#128149;</button>
+                        <div class="hold-bar"><i id="hold-preenchida"></i></div>
+                    </div>
+                    <p class="cine-dica" aria-hidden="true">segure o cora&ccedil;&atilde;o para abrir o bilhete</p>
+
+                    <div class="recado" id="recado">
+<div class="carta" id="carta" aria-hidden="true">
+                        <div class="carta-env"></div>
+                        <div class="carta-aba"></div>
+                        <div class="carta-papel">&#128153;</div>
+                    </div>
+                    <p class="recado-texto cursiva" id="recado-texto"></p>
+                        <span class="cursiva assinatura">Com amor, Alef &#128153;</span>
+                        <div style="text-align:center; margin-top:22px;">
+                            <button class="btn-luzes" id="btn-luzes">Acender as luzes &#128161;</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="painel-luzes" id="painel-luzes" aria-hidden="true">
+                <div class="pl-sombra" aria-hidden="true"></div>
+                <div class="pl-wrap">
+                    <h2 class="pl-titulo">o nosso filme continua</h2>
+                    <p class="pl-frase cursiva">a sess&atilde;o acabou, o amor n&atilde;o</p>
+
+                    <div class="pl-recado">
+                        <p class="pl-texto" id="painel-texto"></p>
+                        <span class="pl-assinatura">com amor,</span>
+                        <svg class="assinatura-svg" id="assinatura-svg" viewBox="0 0 274 100" aria-hidden="true">
+                            <defs>
+                                <linearGradient id="assGrad" x1="0" y1="0" x2="1" y2="0">
+                                    <stop offset="0%" stop-color="#ff9ecb"/>
+                                    <stop offset="50%" stop-color="#ffd166"/>
+                                    <stop offset="100%" stop-color="#b583ff"/>
+                                </linearGradient>
+                            </defs>
+                            <text class="ass-nome" x="0" y="72">Sara</text>
+                            <path class="ass-traco ass-heart" style="--ass-delay:.55s" d="M 118 74 C 108 62 94 54 100 44 C 105 37 116 40 118 50 C 120 40 131 37 136 44 C 142 54 128 62 118 74"/>
+                            <path class="ass-cheio ass-heart" style="--ass-delay:1.6s" d="M 118 74 C 108 62 94 54 100 44 C 105 37 116 40 118 50 C 120 40 131 37 136 44 C 142 54 128 62 118 74"/>
+                            <text class="ass-nome ass-nome-2" x="152" y="72">Alef</text>
+                            <path class="ass-traco ass-flourir" style="--ass-delay:1.1s" d="M 4 86 C 38 93 58 86 76 80 C 100 72 120 78 140 82 C 168 88 198 84 228 80 C 248 77 260 78 270 82"/>
+                        </svg>
+                    </div>
+
+                    <div class="galeria" id="galeria"></div>
+                    <div class="galeria-pontos" id="galeria-pontos" aria-hidden="true"></div>
+
+                    <div class="certificado" id="certificado" aria-hidden="true">
+                        <p class="cert-titulo">&#10022; sess&atilde;o assistida</p>
+                        <p class="cert-data" id="cert-data"></p>
+                        <p class="cert-rodape">1&ordm; ano &#183; Sara &#10084; Alef</p>
+                        <p class="cert-fugas" id="cert-fugas"></p>
+                    </div>
+
+                    <div class="pl-botoes">
+                        <button class="btn-luzes pl-voltar" id="btn-voltar-cinema">Voltar ao cinema</button>
+                        <button class="btn-luzes pl-voltar" id="btn-voltar-inicio">Voltar ao in&iacute;cio</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

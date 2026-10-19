@@ -1,0 +1,2058 @@
+/* ============================================================
+   PARA-SARA · estilos
+   noite romântica · rosa / violeta / dourado
+   ============================================================ */
+
+@property --cap-cor {
+    syntax: "<color>";
+    inherits: true;
+    initial-value: #ff9ecb;
+}
+
+:root {
+    --rosa: #ff9ecb;
+    --rosa-forte: #f15bb5;
+    --violeta: #b583ff;
+    --dourado: #ffd166;
+    --azul: #7cd3ff;
+    --branco: #fff6fb;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+html, body {
+    background-color: #0a0618;
+}
+
+body {
+    font-family: "Montserrat", sans-serif;
+    background-color: #0a0618;
+    color: var(--branco);
+    overflow-x: hidden;
+    line-height: 1.5;
+    overscroll-behavior-y: none;
+}
+
+body, button, input {
+    font-family: "Montserrat", sans-serif;
+}
+
+body.sem-scroll {
+    overflow: hidden;
+}
+
+/* ---------- fundo do céu (fixo) ---------- */
+.sky-bg {
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    background:
+        radial-gradient(75% 55% at 50% 12%, rgba(91, 43, 130, .42), transparent 70%),
+        radial-gradient(60% 45% at 82% 78%, rgba(197, 54, 128, .16), transparent 70%),
+        linear-gradient(180deg, #0b0620, #160b30 45%, #1d0f3a 70%, #2a1350);
+}
+
+/* ---------- brilho da cor do capítulo ---------- */
+.glow-global {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+        radial-gradient(58vw 44vh at 50% 28%, color-mix(in srgb, var(--cap-cor, #ff9ecb) 26%, transparent), transparent 70%);
+    transition: background 1.4s ease;
+}
+body[data-cap="0"] .glow-global { --cap-cor: #ff9ecb; }
+body[data-cap="1"] .glow-global { --cap-cor: #b583ff; }
+body[data-cap="2"] .glow-global { --cap-cor: #ffd166; }
+body[data-cap="3"] .glow-global { --cap-cor: #7cd3ff; }
+body[data-cap="4"] .glow-global { --cap-cor: #f15bb5; }
+body[data-cap="5"] .glow-global { --cap-cor: #ffd9ee; }
+
+/* ---------- utilitários ---------- */
+.cursiva {
+    font-family: "Dancing Script", cursive;
+    font-weight: 600;
+}
+
+.glass {
+    background: rgba(255, 255, 255, .06);
+    border: 1px solid rgba(255, 255, 255, .14);
+    border-radius: 22px;
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, .35);
+}
+
+main {
+    position: relative;
+    z-index: 2;
+}
+
+section {
+    position: relative;
+}
+
+/* ============================================================
+   ABERTURA
+   ============================================================ */
+#inicio {
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px 22px 90px;
+    overflow: hidden;
+}
+
+#hero-ceu {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+}
+
+#inicio::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    width: 130vmin;
+    height: 130vmin;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 158, 203, .18), transparent 60%);
+    animation: halo 8s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes halo {
+    0%, 100% { transform: scale(1); opacity: .8; }
+    50% { transform: scale(1.12); opacity: 1; }
+}
+
+.nomes {
+    font-size: 1rem;
+    letter-spacing: 5px;
+    color: var(--dourado);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    opacity: .9;
+}
+
+.titulo-hero {
+    font-size: clamp(4.5rem, 22vw, 8rem);
+    line-height: 1;
+    background: linear-gradient(120deg, var(--rosa), var(--dourado), var(--violeta));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    text-shadow: 0 0 60px rgba(255, 158, 203, .4);
+    animation: surgirTexto 1.6s ease-out both;
+}
+
+.sub-hero {
+    font-size: clamp(1.4rem, 7vw, 2.2rem);
+    color: var(--branco);
+    opacity: .85;
+    margin-top: 8px;
+    animation: surgirTexto 1.6s .25s ease-out both;
+}
+
+@keyframes surgirTexto {
+    from { opacity: 0; transform: translateY(24px); filter: blur(6px); }
+    to { opacity: 1; transform: none; filter: none; }
+}
+
+.rotulo {
+    font-size: .78rem;
+    letter-spacing: 3px;
+    color: var(--rosa);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+#contador {
+    display: inline-block;
+    padding: 14px 26px;
+    margin-top: 26px;
+    text-align: center;
+    animation: surgirTexto 1.6s .5s ease-out both;
+}
+
+.contagem-regressiva {
+    margin-top: 14px;
+    font-size: .72rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-align: center;
+    color: var(--dourado);
+    opacity: .9;
+    text-shadow: 0 0 18px rgba(255, 209, 102, .35);
+    animation: surgirTexto 1.6s .8s ease-out both;
+}
+
+.tempo,
+.stat-val {
+    font-variant-numeric: tabular-nums;
+}
+
+.tempo {
+    font-size: clamp(1rem, 4.5vw, 1.4rem);
+    font-weight: 600;
+    color: var(--branco);
+    white-space: nowrap;
+}
+
+.tempo .d {
+    font-size: clamp(2rem, 8vw, 2.6rem);
+    font-weight: 800;
+    color: var(--dourado);
+}
+
+.tempo .un {
+    font-size: .7em;
+    color: var(--rosa);
+    margin-left: 2px;
+}
+
+.seta-hero {
+    position: absolute;
+    bottom: 22px;
+    font-size: 1.4rem;
+    color: var(--rosa);
+    cursor: pointer;
+    animation: setaFlutua 1.8s ease-in-out infinite;
+    user-select: none;
+}
+
+@keyframes setaFlutua {
+    0%, 100% { transform: translateY(0); opacity: .7; }
+    50% { transform: translateY(9px); opacity: 1; }
+}
+
+/* ============================================================
+   TÍTULO GIGANTE (máscara revela)
+   ============================================================ */
+#titulo-gigante {
+    min-height: 88svh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 90px 24px;
+}
+
+.kicker {
+    font-size: .8rem;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--violeta);
+    margin-bottom: 18px;
+}
+
+.titulo-mask {
+    font-family: "Dancing Script", cursive;
+    font-weight: 700;
+    font-size: clamp(3.2rem, 13.5vw, 7rem);
+    line-height: 1.05;
+    background: linear-gradient(120deg, var(--rosa), var(--dourado), var(--violeta));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+.sub-mask {
+    font-size: clamp(1.3rem, 6vw, 2rem);
+    color: var(--branco);
+    opacity: .85;
+    margin-top: 14px;
+}
+
+.kicker, .sub-mask {
+    color: var(--violeta);
+}
+.sub-mask {
+    opacity: .8;
+    color: var(--rosa);
+}
+
+.lingua-do-dia {
+    margin-top: 18px;
+    font-family: "Dancing Script", cursive;
+    font-size: clamp(1.05rem, 4.5vw, 1.4rem);
+    color: var(--dourado);
+    text-shadow: 0 0 14px rgba(255, 215, 130, .45);
+    letter-spacing: .5px;
+    cursor: pointer;
+    user-select: none;
+    transition: color .3s ease;
+}
+.lingua-do-dia:hover {
+    color: #ffe1a0;
+}
+.lingua-do-dia.gira {
+    animation: giraLingua .6s cubic-bezier(.22, 1, .36, 1);
+}
+@keyframes giraLingua {
+    0% { transform: perspective(500px) rotateX(70deg); opacity: 0; }
+    100% { transform: none; opacity: 1; }
+}
+
+/* também usado nos títulos das seções de números/marquee */
+#numeros h2, .constelacao-intro-2 h2 {
+    font-size: clamp(2rem, 9vw, 3.4rem);
+    background: linear-gradient(120deg, var(--rosa), var(--dourado), var(--violeta));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    text-align: center;
+}
+
+/* ---------- revelação por classe (máscaras) ---------- */
+.mask-ui {
+    opacity: 0;
+    transition: opacity 1s ease .15s;
+}
+.mask-ui.on {
+    opacity: 1;
+}
+
+.titulo-mask.mask-ui {
+    letter-spacing: 6px;
+    opacity: 0;
+    transform: perspective(700px) rotateX(12deg);
+    transition: opacity 1.1s ease, letter-spacing 1.2s cubic-bezier(.16, 1, .3, 1), transform 1.1s cubic-bezier(.16, 1, .3, 1);
+}
+.titulo-mask.mask-ui.on {
+    letter-spacing: normal;
+    transform: none;
+    opacity: 1;
+}
+
+/* ============================================================
+   CAPÍTULOS
+   ============================================================ */
+#capitulos {
+    padding: 10px 0 0;
+}
+
+.capitulo {
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: center;
+    padding: 90px 22px 70px;
+}
+
+.capitulo::before,
+.capitulo::after {
+    content: "";
+    min-height: 20px;
+    margin: auto 0;
+}
+
+.capitulo:hover {
+    transform: none;
+}
+
+.cap-kicker {
+    font-size: .78rem;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--cap-cor, var(--rosa));
+    margin-bottom: 16px;
+}
+
+.cap-kicker span {
+    color: var(--dourado);
+}
+
+.data-gigante {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 800;
+    font-size: clamp(2.6rem, 13vw, 6rem);
+    line-height: 1.02;
+    letter-spacing: .4px;
+    margin-bottom: 22px;
+    white-space: nowrap;
+    color: var(--cap-cor, #ff9ecb);
+}
+
+.data-gigante .mc {
+    display: inline-block;
+    transform: translateY(58px) rotate(5deg);
+    opacity: 0;
+    filter: blur(6px);
+    transition: transform .75s cubic-bezier(.16, 1, .3, 1), opacity .75s ease, filter .75s ease;
+    will-change: transform, opacity;
+    background: linear-gradient(120deg, #fff, var(--cap-cor, #ff9ecb) 48%, #fff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+.data-gigante.on .mc {
+    transform: none;
+    opacity: 1;
+    filter: none;
+}
+
+.cap-foto {
+    width: min(78vw, 360px);
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, .18);
+    box-shadow: 0 18px 60px rgba(0, 0, 0, .55);
+    position: relative;
+}
+
+.cap-foto img {
+    width: 100%;
+    height: 125%;
+    object-fit: cover;
+    position: absolute;
+    left: 0;
+    top: -12.5%;
+    transform: translateZ(0);
+    will-change: transform;
+}
+
+.frase-reveal {
+    font-family: "Dancing Script", cursive;
+    font-weight: 600;
+    font-size: clamp(1.5rem, 6.5vw, 2.2rem);
+    max-width: 560px;
+    margin-top: 24px;
+    color: var(--branco);
+}
+
+.frase-reveal .wc {
+    display: inline-block;
+    transform: translateY(16px);
+    opacity: 0;
+    transition: transform .7s cubic-bezier(.16, 1, .3, 1), opacity .7s ease;
+    will-change: transform, opacity;
+}
+.frase-reveal.on .wc {
+    transform: none;
+    opacity: 1;
+}
+
+/* ============================================================
+   CONSTELAÇÃO INTEGRADA AO SCROLL
+   ============================================================ */
+#constelacao-scroll {
+    padding: 0;
+}
+
+.constelacao-intro-2 {
+    min-height: 70svh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 90px 24px;
+}
+
+.constelacao-intro-2 .dica {
+    margin-top: 18px;
+    max-width: 320px;
+    font-size: .95rem;
+    color: rgba(255, 246, 251, .75);
+}
+
+.manchinha {
+    display: inline-block;
+    animation: setaFlutua 1.6s ease-in-out infinite;
+}
+
+.constelacao-runner {
+    height: 260vh;
+    position: relative;
+}
+
+.constelacao-canvas {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+#tela-constelacao {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(60% 50% at 50% 42%, rgba(91, 43, 130, .34), transparent 75%);
+}
+
+.constelacao-progress {
+    position: absolute;
+    bottom: 34px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: .9rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255, 246, 251, .7);
+}
+
+.constelacao-progress b {
+    color: var(--dourado);
+    font-size: 1.4rem;
+}
+
+.constelacao-frase {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    font-family: "Dancing Script", cursive;
+    font-size: clamp(1.8rem, 8vw, 3.2rem);
+    text-align: center;
+    padding: 0 30px 104px;
+    color: var(--dourado);
+    text-shadow: 0 0 40px rgba(255, 209, 102, .55);
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 1s ease .2s, transform 1s ease .2s;
+    pointer-events: none;
+}
+.constelacao-frase.on {
+    opacity: 1;
+    transform: none;
+}
+
+/* ---- chuva de corações ---- */
+#chuva-coracao {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 3;
+    overflow: hidden;
+}
+
+.coracao-caindo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: clamp(14px, 3.6vw, 30px);
+    opacity: 0;
+    will-change: transform, opacity;
+    animation: caiCora var(--dur, 3.4s) ease-in var(--atraso, 0s) forwards;
+}
+
+@keyframes caiCora {
+    0% { transform: translate3d(0, -8vh, 0) rotate(0deg); opacity: 0; }
+    10% { opacity: .95; }
+    55% { opacity: .85; }
+    85% { opacity: .5; }
+    100% { transform: translate3d(0, calc(100vh + 40px), 0) rotate(var(--rot, 200deg)); opacity: 0; }
+}
+
+/* ============================================================
+   A LUA DA NOSSA NOITE
+   ============================================================ */
+#lua {
+    min-height: 90svh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 90px 20px 70px;
+    text-align: center;
+}
+
+.lua-intro h2 {
+    font-size: clamp(2rem, 9vw, 3.4rem);
+    background: linear-gradient(120deg, var(--rosa), var(--dourado), var(--violeta));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+.lua-sub {
+    margin-top: 10px;
+    font-family: "Dancing Script", cursive;
+    font-size: clamp(1.2rem, 5vw, 1.7rem);
+    color: rgba(255, 246, 251, .85);
+}
+
+.lua-card {
+    margin-top: 34px;
+    padding: 26px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+    flex-wrap: wrap;
+}
+
+#canvas-lua {
+    width: 210px;
+    height: 210px;
+    flex: 0 0 auto;
+}
+
+.lua-info {
+    text-align: left;
+}
+
+.lua-fase {
+    font-family: "Dancing Script", cursive;
+    font-size: clamp(1.6rem, 7vw, 2.2rem);
+    color: var(--dourado);
+    text-shadow: 0 0 26px rgba(255, 209, 102, .4);
+}
+
+.lua-luz {
+    margin-top: 4px;
+    font-size: .82rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255, 246, 251, .78);
+}
+
+.lua-data {
+    margin-top: 10px;
+    font-size: .76rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--rosa);
+}
+
+.lua-nota {
+    margin-top: 26px;
+    max-width: 520px;
+    font-family: "Dancing Script", cursive;
+    font-size: clamp(1.05rem, 4.6vw, 1.4rem);
+    color: rgba(255, 246, 251, .9);
+}
+
+@media (max-width: 540px) {
+    .lua-card {
+        flex-direction: column;
+        gap: 18px;
+        padding: 24px 20px;
+    }
+    .lua-info {
+        text-align: center;
+    }
+}
+
+/* ============================================================
+   NÚMEROS QUE CONTAM
+   ============================================================ */
+#numeros {
+    min-height: 80svh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 90px 18px 60px;
+}
+
+.stats {
+    margin-top: 48px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    width: min(90vw, 560px);
+}
+
+.stat {
+    background: rgba(255, 255, 255, .06);
+    border: 1px solid rgba(255, 255, 255, .12);
+    border-radius: 20px;
+    padding: 26px 14px 20px;
+    text-align: center;
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+}
+
+.stat-val {
+    display: block;
+    font-size: clamp(2rem, 9vw, 3.4rem);
+    font-weight: 800;
+    background: linear-gradient(120deg, var(--dourado), var(--rosa));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    line-height: 1.1;
+}
+
+.stat-val-inf {
+    display: block;
+    font-size: clamp(2.6rem, 11vw, 4rem);
+    font-weight: 800;
+    color: var(--dourado);
+    line-height: 1;
+    animation: pulsoInf 2.4s ease-in-out infinite;
+}
+
+@keyframes pulsoInf {
+    0%, 100% { transform: scale(1); opacity: .85; }
+    50% { transform: scale(1.14); opacity: 1; }
+}
+
+.stat-rot {
+    display: block;
+    margin-top: 6px;
+    font-size: .72rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255, 246, 251, .7);
+}
+
+/* ============================================================
+   RECEITA DO NOSSO AMOR
+   ============================================================ */
+#receita {
+    min-height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 90px 18px 70px;
+}
+
+#receita h2 {
+    font-size: clamp(2rem, 9vw, 3.4rem);
+    background: linear-gradient(120deg, var(--rosa), var(--dourado), var(--violeta));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    text-align: center;
+    margin-bottom: 34px;
+}
+
+.receita-card {
+    width: min(92vw, 420px);
+    background: rgba(255, 255, 255, .06);
+    border: 1px solid rgba(255, 255, 255, .14);
+    border-radius: 26px;
+    padding: 26px 24px 30px;
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    position: relative;
+    overflow: hidden;
+}
+.receita-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(120% 60% at 50% 0%, rgba(255, 190, 130, .14), transparent 60%);
+    pointer-events: none;
+}
+
+.rec-cab {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    align-items: flex-start;
+    padding-bottom: 14px;
+    margin-bottom: 16px;
+    border-bottom: 1px dashed rgba(255, 215, 160, .35);
+}
+.rec-meta {
+    font-size: .78rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255, 246, 251, .72);
+}
+.rec-meta.rec-rend {
+    color: var(--dourado);
+}
+
+.rec-bloco + .rec-bloco {
+    margin-top: 18px;
+}
+.rec-titulo {
+    font-family: "Dancing Script", cursive;
+    font-size: 1.35rem;
+    color: var(--rosa);
+    margin-bottom: 8px;
+}
+
+.rec-ingredientes {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+.rec-ingredientes li {
+    font-size: .95rem;
+    color: rgba(255, 246, 251, .92);
+    padding-left: 20px;
+    position: relative;
+}
+.rec-ingredientes li::before {
+    content: "\2726";
+    position: absolute;
+    left: 0;
+    top: 1px;
+    color: var(--dourado);
+    font-size: .8rem;
+}
+
+.rec-modo {
+    list-style: none;
+    counter-reset: passo;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.rec-modo li {
+    counter-increment: passo;
+    font-family: "Dancing Script", cursive;
+    font-size: 1.18rem;
+    color: rgba(255, 246, 251, .94);
+    padding-left: 34px;
+    position: relative;
+}
+.rec-modo li::before {
+    content: counter(passo);
+    position: absolute;
+    left: 0;
+    top: 2px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: inherit;
+    font-size: .95rem;
+    color: var(--branco);
+    background: linear-gradient(135deg, var(--rosa), var(--dourado));
+}
+
+/* ============================================================
+   MARQUEE INFINITO
+   ============================================================ */
+#marquee-secao {
+    position: relative;
+    padding: 60px 0 70px;
+    overflow: hidden;
+}
+
+#marquee-secao::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(70% 90% at 50% 50%, transparent 55%, #0a0618 100%);
+}
+
+.marquee-faixa {
+    display: flex;
+    width: max-content;
+    white-space: nowrap;
+    animation: marqueeX 28s linear infinite;
+}
+
+.marquee-faixa.reversa {
+    animation-direction: reverse;
+    margin-bottom: 18px;
+}
+
+@keyframes marqueeX {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
+
+.mq-item {
+    font-family: "Dancing Script", cursive;
+    font-weight: 700;
+    font-size: clamp(2.4rem, 10vw, 4.4rem);
+    padding: 0 26px;
+    background: linear-gradient(120deg, var(--rosa), var(--violeta), var(--dourado));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+.mq-item.acento {
+    background: linear-gradient(110deg, var(--dourado), var(--rosa) 45%, var(--violeta));
+    background-size: 220% 100%;
+    animation: mqBrilho 3.2s linear infinite;
+}
+
+@keyframes mqBrilho {
+    from { background-position: 0% 0; }
+    to { background-position: 220% 0; }
+}
+
+.mq-est {
+    color: var(--dourado);
+    -webkit-text-fill-color: var(--dourado);
+}
+
+/* ============================================================
+   FINAL · pergunta / cinema / segurar pra revelar
+   ============================================================ */
+#final {
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 110px 18px 80px;
+    background: radial-gradient(75% 60% at 50% 10%, rgba(90, 35, 130, .35), transparent 70%);
+}
+
+.pergunta {
+    max-width: 520px;
+    width: 100%;
+    text-align: center;
+    padding: 36px 24px 34px;
+    transition: opacity .6s ease, transform .6s ease;
+}
+
+.pergunta.some {
+    opacity: 0;
+    transform: scale(.97);
+    pointer-events: none;
+}
+
+.estrela-grande {
+    font-size: 2.2rem;
+    color: var(--dourado);
+    margin-bottom: 8px;
+}
+
+@keyframes giroEstrela {
+    0% { transform: rotate(0) scale(0); }
+    60% { transform: rotate(360deg) scale(1.25); }
+    100% { transform: rotate(360deg) scale(1); }
+}
+
+.pergunta h2 {
+    font-size: clamp(1.8rem, 8vw, 2.6rem);
+    margin-bottom: 10px;
+    background: linear-gradient(120deg, var(--rosa), var(--dourado));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+.pergunta-texto {
+    margin: 14px 0 20px;
+    color: rgba(255, 246, 251, .88);
+    font-weight: 400;
+}
+
+.botoes {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    position: relative;
+}
+
+.btn-sim {
+    padding: 14px 30px;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #3b0d2b;
+    background: linear-gradient(120deg, var(--rosa), var(--dourado));
+    border: none;
+    border-radius: 40px;
+    cursor: pointer;
+    transition: transform .15s ease, box-shadow .3s ease;
+}
+
+.btn-sim:hover {
+    transform: scale(1.06);
+    box-shadow: 0 8px 24px rgba(255, 158, 203, .45);
+}
+
+.btn-nao {
+    padding: 14px 26px;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--branco);
+    background: rgba(255, 255, 255, .1);
+    border: 1px solid var(--rosa);
+    border-radius: 40px;
+    cursor: pointer;
+    transition: transform .12s ease, box-shadow .3s ease;
+    z-index: 50;
+}
+
+.btn-nao:hover {
+    box-shadow: 0 0 18px rgba(255, 158, 203, .4);
+    transform: scale(1.05);
+}
+
+.escapadas {
+    margin-top: 18px;
+    font-size: .78rem;
+    color: rgba(255, 246, 251, .55);
+    font-style: italic;
+}
+
+/* ---------- cinema (a sessão do nosso filme) ---------- */
+.filme {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 62;
+    overflow: hidden;
+    visibility: hidden;
+    background:
+        radial-gradient(90% 75% at 50% 28%, rgba(58, 22, 92, .95), transparent 72%),
+        linear-gradient(180deg, #05020f, #0d0620 60%, #180b30);
+    background-color: #05020f;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.filme.on {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.filme.fora {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.cine-apresenta {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(2rem, 9vw, 4rem);
+    font-weight: 700;
+    letter-spacing: 10px;
+    text-transform: uppercase;
+    color: var(--dourado);
+    text-shadow: 0 0 60px rgba(255, 209, 102, .45);
+    opacity: 0;
+    transition: opacity .8s ease;
+}
+
+.cine-apresenta.on { opacity: 1; }
+.cine-apresenta.some { opacity: 0; }
+
+.estrela-correndo {
+    position: absolute;
+    top: 24%;
+    left: -9%;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #fff 0%, var(--dourado) 55%, transparent 75%);
+    box-shadow: 0 0 16px 4px rgba(255, 209, 102, .7);
+    opacity: 0;
+}
+
+.estrela-correndo.on {
+    animation: estrelaCorre 1.2s ease-in forwards;
+}
+
+@keyframes estrelaCorre {
+    0% { transform: translate(0, 0) scale(1); opacity: 0; }
+    10% { opacity: 1; }
+    100% { transform: translate(106vw, 38vh) scale(.25); opacity: 0; }
+}
+
+.cine-poster {
+    position: absolute;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.cine-poster.on { display: flex; }
+
+.cine-poster img {
+    width: min(50vw, 295px);
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    border-radius: 18px;
+    border: 2px solid rgba(255, 209, 102, .65);
+    box-shadow: 0 0 70px rgba(255, 209, 102, .28), 0 24px 70px rgba(0, 0, 0, .65);
+}
+
+.cine-poster.on img {
+    animation: posterZoom 1.15s ease-out both;
+}
+
+@keyframes posterZoom {
+    from { transform: scale(1.14) rotate(-1.5deg); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.cine-poster.grande img {
+    width: min(72vw, 410px);
+}
+
+/* ---------- legenda da música (subtítulos) ---------- */
+.cine-sub {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 9vh;
+    text-align: center;
+    font-family: "Dancing Script", cursive;
+    font-size: clamp(1.2rem, 5vw, 1.8rem);
+    color: rgba(255, 246, 251, .96);
+    text-shadow: 0 2px 14px rgba(0, 0, 0, .7), 0 0 30px rgba(255, 158, 203, .45);
+    padding: 0 28px;
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity .7s ease, transform .7s ease;
+    pointer-events: none;
+    z-index: 4;
+}
+.cine-sub.on {
+    opacity: 1;
+    transform: none;
+}
+
+/* ---------- flashback: cenas do nosso filme ---------- */
+.cine-flashback {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    z-index: 0;
+    pointer-events: none;
+}
+.cine-flashback img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    filter: brightness(.62);
+    animation: fbCena 15.6s linear infinite;
+    animation-delay: calc(var(--fb-i) * 2.6s);
+}
+@keyframes fbCena {
+    0%, 11% { opacity: 0; transform: scale(1.06); }
+    16%, 72% { opacity: .45; }
+    83%, 100% { opacity: 0; transform: scale(1.18); }
+}
+
+/* ---------- cena extra (pós-créditos) ---------- */
+.cine-extra {
+    position: absolute;
+    inset: 0;
+    z-index: 6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    padding: 0 26px;
+    text-align: center;
+    background: #04010b;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity .9s ease, visibility .9s;
+}
+
+.cine-extra.on {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    cursor: pointer;
+}
+
+.cine-extra-tag {
+    font-size: .78rem;
+    font-weight: 600;
+    letter-spacing: 8px;
+    text-transform: uppercase;
+    color: var(--dourado);
+    opacity: .85;
+    animation: surgirTexto 1.2s ease-out both;
+}
+
+.cine-extra-texto {
+    font-family: "Dancing Script", cursive;
+    font-size: clamp(1.35rem, 6vw, 2rem);
+    line-height: 1.35;
+    color: var(--branco);
+    max-width: 520px;
+    text-shadow: 0 0 30px rgba(255, 158, 203, .45);
+    animation: surgirTexto 1.4s .2s ease-out both;
+}
+
+.cine-extra-img {
+    width: min(58vw, 280px);
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    border-radius: 18px;
+    border: 1px solid rgba(255, 209, 102, .45);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, .6);
+    animation: surgirTexto 1.4s .1s ease-out both;
+}
+
+.cine-extra-dica {
+    font-size: .7rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255, 246, 251, .4);
+}
+
+/* ---------- Ken Burns no pôster grande ---------- */
+.cine-poster.grande img {
+    animation: kenburnsGrande 9s ease-out both;
+}
+@keyframes kenburnsGrande {
+    from { transform: scale(1.05) rotate(.4deg); opacity: 0; }
+    18% { opacity: 1; }
+    100% { transform: scale(1.22) rotate(.4deg); opacity: 1; }
+}
+
+.cine-rolagem {
+    position: absolute;
+    inset: 0;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 0 26px;
+    text-align: center;
+}
+
+.cine-rolagem.on { display: flex; }
+
+.cine-item {
+    opacity: 0;
+    transform: translateY(34px) scale(.96);
+    filter: blur(6px);
+    letter-spacing: 6px;
+    transition: opacity .9s ease, transform .9s cubic-bezier(.16, 1, .3, 1), filter .9s ease, letter-spacing .9s ease;
+}
+
+.cine-item .nb {
+    white-space: nowrap;
+}
+
+.cine-item.on {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    letter-spacing: normal;
+}
+
+.cine-item.tit {
+    font-family: "Dancing Script", cursive;
+    font-weight: 700;
+    font-size: clamp(2.2rem, 9vw, 4rem);
+    line-height: 1.05;
+    background: linear-gradient(120deg, var(--rosa), var(--dourado), var(--violeta));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    letter-spacing: normal;
+}
+
+.cine-item.rot {
+    font-size: .8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 7px;
+    color: rgba(255, 247, 251, .88);
+}
+
+.cine-item.sub {
+    font-family: "Dancing Script", cursive;
+    font-size: 1.45rem;
+    color: rgba(255, 247, 251, .94);
+    text-shadow: 0 1px 10px rgba(0, 0, 0, .5);
+    letter-spacing: normal;
+}
+
+.cine-item.fim {
+    font-family: "Dancing Script", cursive;
+    font-size: 1.6rem;
+    color: #ffd166;
+    text-shadow: 0 1px 10px rgba(0, 0, 0, .45);
+    letter-spacing: normal;
+}
+
+.cine-cap {
+    position: absolute;
+    inset: 0;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 26px;
+    text-align: center;
+}
+
+.cine-cap.on {
+    display: flex;
+    animation: capEntra 1s ease-out both;
+}
+
+@keyframes capEntra {
+    from { opacity: 0; transform: translateY(22px); }
+    to { opacity: 1; transform: none; }
+}
+
+.cine-fim {
+    font-family: "Dancing Script", cursive;
+    font-size: clamp(1.4rem, 6vw, 2.2rem);
+    color: var(--dourado);
+    margin-bottom: 22px;
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 1.1s ease .3s, transform 1.1s cubic-bezier(.16, 1, .3, 1) .3s;
+    pointer-events: none;
+}
+
+.cine-fim.on {
+    opacity: 1;
+    transform: none;
+}
+
+.cine-dica {
+    margin-top: 16px;
+    font-size: .82rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--violeta);
+}
+
+/* ---------- segurar pra revelar ---------- */
+.hold-area {
+    margin-top: 6px;
+    transform-origin: center;
+    transition: transform .12s ease;
+}
+
+.cine-cap #hold-area,
+.cine-cap .cine-dica {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .9s ease, visibility .9s;
+}
+.cine-cap.hold #hold-area,
+.cine-cap.hold .cine-dica {
+    opacity: 1;
+    visibility: visible;
+}
+
+.cine-coracao {
+    font-family: "Dancing Script", cursive;
+    font-weight: 700;
+    width: 92px;
+    height: 92px;
+    font-size: 2.6rem;
+    line-height: 1;
+    color: #3b0d2b;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    touch-action: none;
+    background: radial-gradient(circle at 35% 28%, #ffd3e8, var(--rosa) 55%, var(--rosa-forte) 90%);
+    box-shadow: 0 0 46px rgba(255, 158, 203, .65);
+    animation: coracaoPalpita 1.2s ease-in-out infinite;
+}
+
+@keyframes coracaoPalpita {
+    0%, 100% { transform: scale(1); }
+    40% { transform: scale(1.08); }
+    55% { transform: scale(1); }
+}
+
+.cine-coracao:active {
+    transform: scale(.95);
+}
+
+.hold-bar {
+    width: min(70vw, 280px);
+    height: 10px;
+    margin: 16px auto 0;
+    background: rgba(255, 255, 255, .12);
+    border-radius: 50px;
+    overflow: hidden;
+}
+
+#hold-preenchida {
+    display: block;
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--rosa), var(--violeta), var(--dourado));
+    background-size: 200% 100%;
+    animation: barraBrilho 1.4s linear infinite;
+    border-radius: 50px;
+    transition: width .06s linear;
+}
+
+@keyframes barraBrilho {
+    0% { background-position: 0% 0; }
+    100% { background-position: 200% 0; }
+}
+
+/* ---------- carta que abre ---------- */
+.carta {
+    position: relative;
+    width: 64px;
+    height: 46px;
+    margin: 4px auto 12px;
+    perspective: 300px;
+}
+.carta-env {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--rosa), var(--violeta));
+    border-radius: 8px;
+    box-shadow: 0 10px 26px rgba(0, 0, 0, .4);
+    overflow: hidden;
+}
+.carta-env::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(rgba(255, 255, 255, .28), rgba(255, 255, 255, 0) 42%, rgba(0, 0, 0, .2));
+    border-radius: 8px;
+}
+.carta-aba {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 32px solid transparent;
+    border-right: 32px solid transparent;
+    border-top: 22px solid var(--rosa-forte);
+    border-radius: 8px 8px 0 0;
+    transform-origin: top center;
+    transform: rotateX(0deg);
+    transition: transform .55s cubic-bezier(.45, .1, .3, 1);
+    z-index: 3;
+}
+.carta.abrindo .carta-aba {
+    transform: rotateX(150deg);
+}
+.carta-papel {
+    position: absolute;
+    left: 7px;
+    right: 7px;
+    top: 7px;
+    bottom: 7px;
+    background: linear-gradient(180deg, #fff, #fff4ea);
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.15rem;
+    color: var(--rosa-forte);
+    transform: translateY(3px);
+    transition: transform .55s cubic-bezier(.16, 1, .3, 1) .05s;
+    z-index: 1;
+}
+.carta.abrindo .carta-papel {
+    transform: translateY(-12px);
+}
+.recado.on .carta {
+    opacity: 0;
+    transform: translateY(-8px) scale(.9);
+    transition: opacity .5s ease .1s, transform .5s ease .1s;
+    margin-bottom: -12px;
+}
+
+.recado {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 1s ease .15s, transform 1s cubic-bezier(.16, 1, .3, 1);
+    pointer-events: none;
+}
+
+.recado.on {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+}
+
+.recado-texto {
+    font-size: 1.5rem;
+    line-height: 1.45;
+    margin-top: 12px;
+}
+
+.assinatura {
+    display: block;
+    margin-top: 16px;
+    font-size: 1.5rem;
+    color: var(--dourado);
+}
+
+.btn-luzes {
+    padding: 12px 24px;
+    font-size: .9rem;
+    font-weight: 600;
+    color: var(--branco);
+    background: rgba(255, 255, 255, .08);
+    border: 1px solid var(--dourado);
+    border-radius: 40px;
+    cursor: pointer;
+}
+
+.btn-luzes:hover {
+    background: rgba(255, 209, 102, .16);
+}
+
+/* ---------- ponte céu → cinema ---------- */
+#ponte-ceu {
+    position: fixed;
+    inset: 0;
+    z-index: 61;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+}
+
+#ponte-ceu.on { visibility: visible; }
+
+#ponte-ceu .ponte-est {
+    font-size: 2rem;
+    color: var(--dourado);
+    text-shadow: 0 0 34px rgba(255, 209, 102, .95);
+    transform: scale(.3);
+    opacity: 0;
+}
+
+#ponte-ceu.on .ponte-est {
+    animation: ponteCresce 1.15s cubic-bezier(.16, 1, .3, 1) forwards;
+}
+
+@keyframes ponteCresce {
+    0% { opacity: 0; transform: scale(.3); }
+    22% { opacity: 1; }
+    100% { opacity: 0; transform: scale(24); }
+}
+
+#ponte-ceu::before {
+    content: "";
+    position: absolute;
+    width: 12vmin;
+    height: 12vmin;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 209, 102, .8);
+    box-shadow: 0 0 46px rgba(255, 209, 102, .65);
+    transform: scale(.2);
+    opacity: 0;
+}
+
+#ponte-ceu.on::before {
+    animation: ponteAnel 1.25s ease-out forwards;
+}
+
+@keyframes ponteAnel {
+    0% { opacity: 0; transform: scale(.2); }
+    30% { opacity: 1; }
+    100% { opacity: 0; transform: scale(32); }
+}
+
+/* ---------- painel pós-filme (luzes acesas) ---------- */
+.painel-luzes {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 63;
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+    background:
+        radial-gradient(110% 80% at 50% -10%, rgba(255, 214, 165, .55), transparent 60%),
+        linear-gradient(180deg, #f9ecd8, #f3ddbd 55%, #ecd0a8);
+}
+
+.painel-luzes.on {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.pl-sombra {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+        radial-gradient(60% 40% at 50% 100%, rgba(122, 63, 20, .18), transparent 70%),
+        linear-gradient(180deg, rgba(255, 255, 255, .18), rgba(255, 255, 255, 0) 30%);
+}
+
+.pl-wrap {
+    position: relative;
+    max-width: 520px;
+    margin: 0 auto;
+    padding: 64px 22px 48px;
+    text-align: center;
+    color: #4a2a12;
+}
+
+.pl-titulo {
+    font-family: "Dancing Script", cursive;
+    font-size: clamp(2rem, 8vw, 3rem);
+    font-weight: 700;
+    color: #7a3f14;
+    margin-bottom: 4px;
+}
+
+.pl-frase {
+    font-size: 1.1rem;
+    color: #8a5a2a;
+    margin-bottom: 26px;
+    opacity: .8;
+}
+
+.pl-recado {
+    background: rgba(255, 255, 255, .55);
+    border: 1px solid rgba(122, 63, 20, .18);
+    border-radius: 22px;
+    padding: 22px 20px;
+    margin-bottom: 28px;
+    box-shadow: 0 18px 40px rgba(90, 45, 12, .12);
+}
+
+.pl-texto {
+    font-size: 1.22rem;
+    line-height: 1.6;
+    letter-spacing: .2px;
+}
+
+.pl-assinatura {
+    display: block;
+    margin-top: 14px;
+    font-family: "Dancing Script", cursive;
+    font-size: 1.8rem;
+    color: #7a3f14;
+}
+
+/* ---- assinatura desenhada "Sara ♥ Alef" ---- */
+.assinatura-svg {
+    display: block;
+    width: min(84vw, 340px);
+    height: auto;
+    margin: 10px auto 0;
+    overflow: visible;
+}
+
+.assinatura-svg .ass-traco {
+    fill: none;
+    stroke: #7a3f14;
+    stroke-width: 3.4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+}
+
+.assinatura-svg .ass-heart { stroke-width: 4; }
+.assinatura-svg .ass-flourir { stroke-width: 2.6; opacity: .8; }
+
+.assinatura-svg .ass-nome {
+    font-family: "Dancing Script", cursive;
+    font-size: 46px;
+    fill: url(#assGrad);
+    opacity: 0;
+}
+
+.assinatura-svg.assinando .ass-traco {
+    animation: assEscreve 1.5s cubic-bezier(.45, .1, .3, 1) forwards;
+    animation-delay: var(--ass-delay, 0s);
+}
+
+.assinatura-svg.assinando .ass-nome {
+    animation: assReveal 1.1s cubic-bezier(.4, .1, .3, 1) forwards;
+}
+
+.assinatura-svg.assinando .ass-nome-2 { animation-delay: .28s; }
+
+.assinatura-svg .ass-cheio {
+    fill: url(#assGrad);
+    stroke: none;
+    opacity: 0;
+}
+
+.assinatura-svg.assinando .ass-cheio {
+    animation: assSurge .7s cubic-bezier(.34, 1.56, .64, 1) forwards;
+    animation-delay: var(--ass-delay, 1.9s);
+    transform-box: fill-box;
+    transform-origin: center;
+}
+
+@keyframes assEscreve {
+    to { stroke-dashoffset: 0; }
+}
+
+@keyframes assReveal {
+    0% { clip-path: inset(0 100% 0 0); opacity: 0; }
+    60% { opacity: 1; }
+    100% { clip-path: inset(0 0% 0 0); opacity: 1; }
+}
+
+@keyframes assSurge {
+    0% { opacity: 0; transform: scale(.35) rotate(-12deg); }
+    60% { opacity: 1; transform: scale(1.22); }
+    100% { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+
+.pl-botoes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+/* selo sessão assistida */
+.certificado {
+    margin: 26px auto 8px;
+    padding: 16px 22px;
+    max-width: 420px;
+    text-align: center;
+    color: #7a3f14;
+    border: 2px dashed rgba(122, 63, 20, .5);
+    border-radius: 16px;
+    background: rgba(255, 247, 236, .5);
+}
+.cert-titulo {
+    font-family: "Dancing Script", cursive;
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+    text-transform: lowercase;
+}
+.cert-data {
+    font-weight: 700;
+    margin-top: 4px;
+    color: var(--rosa-forte);
+    font-size: 1.05rem;
+}
+.cert-rodape {
+    font-family: "Dancing Script", cursive;
+    font-size: 1.35rem;
+    margin-top: 4px;
+}
+.cert-fugas {
+    margin-top: 4px;
+    font-size: .82rem;
+    font-style: italic;
+    opacity: .75;
+}
+
+.btn-luzes.pl-voltar {
+    color: #3d1f07;
+    background: rgba(255, 255, 255, .5);
+    border: 1px solid rgba(122, 63, 20, .4);
+}
+
+.btn-luzes.pl-voltar:hover {
+    background: rgba(255, 255, 255, .8);
+}
+
+/* galeria */
+.galeria {
+    display: flex;
+    gap: 14px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding: 6px 24px 18px;
+    margin: 0 auto;
+    scrollbar-width: none;
+}
+
+.galeria::-webkit-scrollbar { display: none; }
+
+.galeria-item {
+    flex: 0 0 68%;
+    max-width: 300px;
+    scroll-snap-align: center;
+    background: rgba(255, 255, 255, .6);
+    border: 1px solid rgba(122, 63, 20, .22);
+    border-radius: 20px;
+    padding: 10px;
+    box-shadow: 0 16px 36px rgba(90, 45, 12, .16);
+}
+
+.galeria-item img {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    border-radius: 14px;
+    display: block;
+}
+
+.galeria-item figcaption {
+    display: block;
+    font-size: .92rem;
+    color: #6b3c16;
+    margin-top: 10px;
+    line-height: 1.35;
+}
+
+.galeria-pontos {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 4px 0 8px;
+}
+
+.galeria-pontos i {
+    display: block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(122, 63, 20, .28);
+    transition: background .3s ease, transform .3s ease;
+}
+
+.galeria-pontos i.on {
+    background: #7a3f14;
+    transform: scale(1.25);
+}
+
+/* ============================================================
+   ELEMENTOS AO VIVO
+   ============================================================ */
+/* coração flutuando */
+.coracao {
+    position: fixed;
+    bottom: -40px;
+    font-size: 1.1rem;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0;
+    animation: flutua 11s linear forwards;
+}
+
+@keyframes flutua {
+    0% { opacity: 0; transform: translateY(0) rotate(0); }
+    12% { opacity: .25; }
+    60% { opacity: .2; }
+    100% { opacity: 0; transform: translateY(-110vh) rotate(340deg); }
+}
+
+/* botão de música */
+#btn-musica {
+    position: fixed;
+    z-index: 80;
+    top: calc(16px + env(safe-area-inset-top, 0px));
+    right: calc(16px + env(safe-area-inset-right, 0px));
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, .25);
+    background: rgba(20, 10, 40, .55);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    color: var(--branco);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, .4);
+}
+
+#btn-musica:hover {
+    border-color: var(--rosa);
+}
+
+.equalizer {
+    display: none;
+    align-items: flex-end;
+    gap: 3px;
+    height: 18px;
+}
+
+.equalizer span {
+    width: 4px;
+    border-radius: 2px;
+    background: var(--rosa);
+    animation: eq 1s ease-in-out infinite;
+}
+
+.equalizer span:nth-child(2) { animation-delay: .18s; }
+.equalizer span:nth-child(3) { animation-delay: .34s; }
+.equalizer span:nth-child(4) { animation-delay: .1s; }
+
+@keyframes eq {
+    0%, 100% { height: 5px; }
+    50% { height: 18px; }
+}
+
+body.tocando #btn-musica .icone-play { display: none; }
+body.tocando #btn-musica .equalizer { display: flex; }
+body.tocando #btn-musica { border-color: var(--rosa); }
+
+/* fogos */
+#canvas-fogos {
+    position: fixed;
+    inset: 0;
+    z-index: 70;
+    pointer-events: none;
+}
+
+#canvas-infinito {
+    position: fixed;
+    inset: 0;
+    z-index: 68;
+    pointer-events: none;
+}
+
+/* estrela cadente */
+.estrela-cadente {
+    position: fixed;
+    z-index: 75;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #fff 0%, var(--dourado) 55%, transparent 75%);
+    box-shadow: 0 0 14px 4px rgba(255, 209, 102, .65);
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    animation: cadente 1s ease-out forwards;
+}
+
+@keyframes cadente {
+    to { opacity: 0; transform: translate(-50%, -50%) translateY(-40px); }
+}
+
+/* estrela cadente que voa até a estrela acendida */
+.estrela-cadente.cad-alvo {
+    animation: cadAlvo 1.1s ease-out forwards;
+}
+
+@keyframes cadAlvo {
+    0% { opacity: 0; transform: translate(-50%, -50%) scale(.6); }
+    14% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    68% { opacity: 1; transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(1); }
+    100% { opacity: 0; transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(.45); }
+}
+
+/* faísca (estrela tocável) */
+.faisca {
+    position: fixed;
+    z-index: 75;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--branco);
+    pointer-events: none;
+    animation: faiscaVoa .8s ease-out forwards;
+}
+
+@keyframes faiscaVoa {
+    to { opacity: 0; transform: translate(-50%, -50%) translate(var(--fx), var(--fy)) scale(.4); }
+}
+
+/* rastro no dedo */
+.rastro {
+    position: fixed;
+    z-index: 75;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #fff 0%, var(--dourado) 60%, transparent 80%);
+    box-shadow: 0 0 10px rgba(255, 209, 102, .6);
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    animation: rastroFade .7s ease-out forwards;
+}
+
+.rastro.mini {
+    width: 5px;
+    height: 5px;
+}
+
+@keyframes rastroFade {
+    0% { opacity: .95; }
+    100% { opacity: 0; }
+}
+
+/* ---------- redução de movimento ---------- */
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+    }
+    .mask-ui, .titulo-mask.mask-ui, .data-gigante .mc, .frase-reveal .wc {
+        opacity: 1 !important;
+        transform: none !important;
+        letter-spacing: normal !important;
+        filter: none !important;
+    }
+    .cine-flashback img,
+    .cine-poster.grande img {
+        animation: none !important;
+        opacity: 0;
+    }
+    .cine-flashback.liga img {
+        opacity: .4;
+    }
+    .carta,
+    .carta-aba,
+    .carta-papel {
+        transform: none !important;
+    }
+}
+
+/* ---------- responsivo ---------- */
+@media (min-width: 900px) {
+    .cap-foto { width: min(46vw, 430px); }
+    .stats { grid-template-columns: repeat(4, 1fr); }
+    .constelacao-frase { font-size: clamp(2rem, 5vw, 3.4rem); }
+}
