@@ -148,26 +148,41 @@ function ligaCoracoes(velocidade) {
  * ------------------------------------------------------------ */
 let tocando = false;
 let audio = null;
+let pausaDoUsuario = false;   // ela pausou de propósito: não religar sozinho
+const EVENTOS_GESTO = ["pointerdown", "pointerup", "touchend", "click", "keydown"];
+
 function criarAudio() {
     try {
         audio = new Audio(CONFIG.musica);
         audio.loop = true;
         audio.preload = "none";
         audio.volume = 0.85;
-        audio.addEventListener("play", () => { tocando = true; document.body.classList.add("tocando"); });
+        audio.addEventListener("play", () => {
+            tocando = true;
+            document.body.classList.add("tocando");
+            desarmarAutoplay();
+        });
         audio.addEventListener("pause", () => { tocando = false; document.body.classList.remove("tocando"); });
     } catch (e) { audio = null; }
 }
 function alternarMusica() {
     if (!audio) criarAudio();
     if (!audio) return;
-    if (tocando) { audio.pause(); } else { const prom = audio.play(); if (prom && prom.catch) prom.catch(() => { /* autoplay bloqueado */ }); }
+    if (tocando) {
+        pausaDoUsuario = true;
+        audio.pause();
+    } else {
+        pausaDoUsuario = false;
+        const prom = audio.play();
+        if (prom && prom.catch) prom.catch(() => { /* autoplay bloqueado */ });
+    }
 }
 
 function subirTrilha() {
     if (!audio) criarAudio();
     if (!audio || !audio.play) return;
     if (tocando) return;
+    pausaDoUsuario = false;
     try { audio.currentTime = 0; } catch (e) { /* ignore */ }
     audio.loop = true;
     const prom = audio.play();
@@ -184,18 +199,23 @@ function subirTrilha() {
 criarAudio();
 if ($("#btn-musica")) $("#btn-musica").addEventListener("click", alternarMusica);
 
-let tentouAutoplay = false;
-function tentarIniciarMusica() {
-    if (tentouAutoplay || tocando || !audio || !audio.play) return;
-    tentouAutoplay = true;
-    const prom = audio.play();
-    if (prom && prom.catch) prom.catch(() => {
-        if (!tentouAutoplayParado) { tentouAutoplayParado = true; }
-    });
+/* O navegador só libera áudio depois de um gesto real (toque/clique/tecla) —
+ * rolar a página NÃO conta como gesto em nenhum navegador. Por isso tentamos
+ * em todos os gestos até o play funcionar (e paramos quando a música começa). */
+function desarmarAutoplay() {
+    EVENTOS_GESTO.forEach(evt => window.removeEventListener(evt, tentarIniciarMusica));
 }
-let tentouAutoplayParado = false;
-window.addEventListener("pointerdown", tentarIniciarMusica, { passive: true, once: true });
-window.addEventListener("keydown", tentarIniciarMusica, { once: true });
+function tentarIniciarMusica(ev) {
+    if (tocando || pausaDoUsuario || !audio || !audio.play) return;
+    // o botão de música decide sozinho (senão o pointerdown inicia e o click pausa)
+    if (ev && ev.target && ev.target.closest && ev.target.closest("#btn-musica")) return;
+    const prom = audio.play();
+    if (prom && prom.catch) prom.catch(() => { /* ainda bloqueado: tenta no próximo gesto */ });
+}
+function armarAutoplay() {
+    EVENTOS_GESTO.forEach(evt => window.addEventListener(evt, tentarIniciarMusica, { passive: true }));
+}
+armarAutoplay();
 
 /* ------------------------------------------------------------
  * 4 · capítulos (gerados a partir do CONFIG)
